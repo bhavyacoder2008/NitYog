@@ -1,120 +1,70 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { Navigate, Route, Routes, useParams } from 'react-router-dom'
+import Navbar from './components/layout/Navbar.jsx'
+import WhatsAppFloatingButton from './components/layout/WhatsAppFloatingButton.jsx'
+import SearchBar from './components/ui/SearchBar.jsx'
 
-function App() {
-  const [count, setCount] = useState(0)
+function HomePage() {
+  const [searchQuery, setSearchQuery] = useState('')
+
+  function handleSearch(query) {
+    // The global product API call will be connected here.
+    setSearchQuery(query)
+  }
 
   return (
+    <main className="mx-auto min-h-[120vh] w-[min(calc(100%-2rem),75rem)] py-12 md:py-24">
+      <h1 className="mb-3 font-heading text-4xl font-semibold">Find a little joy</h1>
+      <SearchBar
+        value={searchQuery}
+        onChange={setSearchQuery}
+        onSubmit={handleSearch}
+      />
+    </main>
+  )
+}
+
+function CategoryPage() {
+  const { categorySlug } = useParams()
+  const [searchQuery, setSearchQuery] = useState('')
+  const categoryName = categorySlug.replaceAll('-', ' ')
+
+  function handleSearch(query) {
+    // The category-scoped product API call will be connected here.
+    setSearchQuery(query)
+  }
+
+  return (
+    <main className="mx-auto min-h-[120vh] w-[min(calc(100%-2rem),75rem)] py-12 md:py-24">
+      <h1 className="mb-3 font-heading text-4xl font-semibold capitalize">{categoryName}</h1>
+      <p className="mb-8">Products for this category will appear here.</p>
+      <SearchBar
+        value={searchQuery}
+        onChange={setSearchQuery}
+        onSubmit={handleSearch}
+        placeholder={`Search in ${categoryName}...`}
+        label={`Search toys in ${categoryName}`}
+      />
+    </main>
+  )
+}
+
+function InfoPage({ title }) {
+  return <main className="mx-auto min-h-[120vh] w-[min(calc(100%-2rem),75rem)] py-12 md:py-24"><h1 className="mb-3 font-heading text-4xl font-semibold">{title}</h1><p>Page content will be added later.</p></main>
+}
+
+function App() {
+  return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/categories/:categorySlug" element={<CategoryPage />} />
+        <Route path="/contact" element={<InfoPage title="Contact Us" />} />
+        <Route path="/about" element={<InfoPage title="About Us" />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <WhatsAppFloatingButton />
     </>
   )
 }
