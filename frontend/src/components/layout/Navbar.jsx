@@ -66,7 +66,7 @@ function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full md:px-6 md:pt-4" ref={navbarRef}>
       <nav
-        className="relative mx-auto flex min-h-18 w-full items-center gap-1 border-b border-brand-brown/20 bg-cream px-2.5 shadow-[0_0.35rem_1rem_rgb(77_44_2_/_0.08)] md:min-h-21 md:max-w-7xl md:gap-5 md:rounded-3xl md:border md:px-6 md:shadow-[0_0.75rem_2rem_rgb(77_44_2_/_0.14)]"
+        className="relative mx-auto flex min-h-18 w-full items-center gap-1 border-b border-brand-brown/20 bg-[#e9e9d9] px-2.5 shadow-[0_0.35rem_1rem_rgb(77_44_2_/_0.08)] md:min-h-21 md:max-w-7xl md:gap-5 md:rounded-3xl md:border md:px-6 md:shadow-[0_0.75rem_2rem_rgb(77_44_2_/_0.14)]"
         aria-label="Main navigation"
       >
         <Link

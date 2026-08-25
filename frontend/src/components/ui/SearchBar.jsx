@@ -11,18 +11,6 @@ function SearchIcon() {
   )
 }
 
-function ClearIcon() {
-  return (
-    <svg
-      className="size-4 fill-none stroke-current stroke-2"
-      viewBox="0 0 20 20"
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" d="m5 5 10 10M15 5 5 15" />
-    </svg>
-  )
-}
-
 function SearchBar({
   value,
   onChange,
@@ -58,16 +46,6 @@ function SearchBar({
         autoComplete="off"
         onChange={(event) => onChange(event.target.value)}
       />
-
-      {value && (
-        <button
-          className="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border-0 bg-transparent text-ink/65 hover:bg-brand-brown/10 hover:text-brand-brown focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-brand-orange"
-          type="button"
-          aria-label="Clear search"
-          onClick={() => onChange('')}
-        >
-        </button>
-      )}
 
       <button
         className="min-h-10 shrink-0 cursor-pointer rounded-xl border-0 bg-brand-orange px-4 font-body font-semibold text-ink transition-colors hover:bg-brand-brown hover:text-white focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-brand-orange disabled:cursor-not-allowed disabled:opacity-50 md:px-6"
