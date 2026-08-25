@@ -6,6 +6,7 @@ import WhatsAppFloatingButton from './components/layout/WhatsAppFloatingButton.j
 import ProductGrid from './components/product/ProductGrid.jsx'
 import SearchBar from './components/ui/SearchBar.jsx'
 import { products as dummyProducts } from './data/products.js'
+import ProductDetailPage from './pages/ProductDetailPage.jsx'
 
 function matchesSearch(product, query) {
   const normalizedQuery = query.toLowerCase()
@@ -108,7 +109,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/categories/:categorySlug" element={<CategoryPage />} />
-        <Route path="/product/:productId" element={<InfoPage title="Product Details" />} />
+        <Route path="/product/:productId" element={<ProductDetailPage />} />
         <Route path="/contact" element={<InfoPage title="Contact Us" />} />
         <Route path="/about" element={<InfoPage title="About Us" />} />
         <Route path="*" element={<Navigate to="/" replace />} />
