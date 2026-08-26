@@ -7,11 +7,17 @@ import {
   FaTimes,
 } from 'react-icons/fa'
 
-//the onClose is a prop which contains the function to se the isModalOpen state as false in the parent component which is the ProductDetails.jsx component, so that the modal can be closed when the user clicks on the close button or outside the modal or presses the escape key.
+// onClose is passed by ProductDetailPage. The child cannot directly change the
+// parent's isBuyModalOpen state, so it asks the parent to close through this callback.
 
 function BuyNowModal({ product, onClose }) {
+  // A ref is needed because showModal/close are native DOM methods, not React APIs.
   const dialogRef = useRef(null)
+  // This state switches the modal UI from the form to the success message.
   const [isSubmitted, setIsSubmitted] = useState(false)
+
+  // react-hook-form owns the input value and validation state, avoiding manual
+  // useState and onChange code for every field.
   const {
     register,
     handleSubmit,
@@ -19,16 +25,21 @@ function BuyNowModal({ product, onClose }) {
   } = useForm({ defaultValues: { phoneNumber: '' } })
 
   useEffect(() => {
+    // Effects run after React commits the dialog element, so current now points to it.
     const dialog = dialogRef.current
-    dialog?.showModal() // Show the dialog when the component mounts, it works because the dialog element is a native HTML element and has a showModal method that opens the dialog in modal mode, preventing interaction with the rest of the page until the dialog is closed.
+    // showModal creates a true modal: focus moves inside and the page behind is blocked.
+    dialog?.showModal()
 
     return () => {
-      if (dialog?.open) dialog.close() // Close the dialog when the component unmounts, it works because the dialog element is a native HTML element and has an open property that indicates whether the dialog is currently open or not, and a close method that closes the dialog.
+      // Cleanup is defensive: close the native dialog if React unmounts it while open.
+      if (dialog?.open) dialog.close()
     }
   }, [])
 
   function handleBackdropClick(event) {
-    if (event.target === dialogRef.current) onClose() //if we click inside the dialog nothing happens as event.target then means that particular clicked element , and if we click outside the dialog then event.target will be the dialog itself and then we close the dialog
+    // Inner clicks bubble here too, but their target remains the clicked child.
+    // Only a backdrop click has the dialog element itself as event.target.
+    if (event.target === dialogRef.current) onClose()
   }
 
   function handleFormSubmit() {
@@ -56,6 +67,7 @@ function BuyNowModal({ product, onClose }) {
           <FaTimes aria-hidden="true" />
         </button>
 
+        {/* The same modal conditionally renders either success UI or form UI. */}
         {isSubmitted ? (
           <section className="flex min-h-100 flex-col items-center justify-center px-6 py-14 text-center sm:px-10">
             <FaCheckCircle className="size-16 text-[#25a956]" aria-hidden="true" />
@@ -96,6 +108,7 @@ function BuyNowModal({ product, onClose }) {
               </li>
             </ul>
 
+            {/* noValidate disables browser popups so react-hook-form owns error UX. */}
             <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
               <label className="font-semibold" htmlFor="customer-phone">
                 Your mobile number
@@ -110,6 +123,7 @@ function BuyNowModal({ product, onClose }) {
                 <span className="border-r border-brand-brown/15 px-4 font-semibold text-brand-brown">
                   +91
                 </span>
+                {/* register connects this native input to react-hook-form and its rules. */}
                 <input
                   className="min-w-0 flex-1 bg-transparent px-4 py-3 font-body text-lg outline-none placeholder:text-ink/40"
                   id="customer-phone"

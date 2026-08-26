@@ -69,6 +69,7 @@ function Footer() {
           <nav aria-label="NitYog social media">
             <ul className="flex list-none items-center justify-center gap-3 p-0 sm:justify-start">
             {socialLinks.map((social) => {
+              // A component type can be stored in data and rendered with a capitalized variable.
               const SocialIcon = social.icon
 
               return (

@@ -2,6 +2,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* These tokens create Tailwind utilities such as bg-cream and font-heading. */
   --color-cream: #e8dfc5;
   --color-ink: #212121;
   --color-brand-brown: #7a4602;

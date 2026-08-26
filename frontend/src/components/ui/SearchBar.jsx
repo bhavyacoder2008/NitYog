@@ -19,6 +19,7 @@ function SearchBar({
   label = 'Search toys',
 }) {
   function handleSubmit(event) {
+    // Prevent the browser's default form submission, which would reload the page.
     event.preventDefault()
     onSubmit(value.trim())
   }
@@ -37,6 +38,7 @@ function SearchBar({
         <SearchIcon />
       </span>
 
+      {/* Controlled input: the parent owns value; this child requests updates. */}
       <input
         className="min-w-0 flex-1 bg-transparent px-1 py-2.5 font-body text-base text-ink outline-none placeholder:text-ink/55 md:text-lg"
         id="toy-search"

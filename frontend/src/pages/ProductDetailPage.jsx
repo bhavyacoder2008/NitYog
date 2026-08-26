@@ -6,10 +6,15 @@ import { formatPrice } from '../utils/currency.js'
 import { buildWhatsAppUrl } from '../utils/whatsapp.js'
 
 function ProductDetailPage() {
+  // The page owns modal visibility; the modal receives only data and an onClose callback.
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false)
+  // The URL identifies the product, while location.state is optional navigation data.
   const { productId } = useParams()
   const location = useLocation()
   const passedProduct = location.state?.product
+
+  // Never display state for the wrong URL. Direct visits currently fall back because
+  // database fetching has intentionally not been implemented yet.
   const product = passedProduct?.id === productId ? passedProduct : null
 
   if (!product) {
@@ -108,6 +113,7 @@ function ProductDetailPage() {
         </section>
       </article>
 
+      {/* Unmounting the modal when closed also discards its temporary form state. */}
       {isBuyModalOpen && (
         <BuyNowModal
           product={product}

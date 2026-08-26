@@ -4,6 +4,8 @@ import { formatPrice } from '../../utils/currency.js'
 function ProductCard({ product }) {
   return (
     <article className="group h-full overflow-hidden rounded-2xl border border-brand-brown/15 bg-[#fffaf0] shadow-[0_0.4rem_1.25rem_rgb(77_44_2_/_0.08)] transition-[transform,box-shadow] hover:-translate-y-1 hover:shadow-[0_0.8rem_1.75rem_rgb(77_44_2_/_0.16)] motion-reduce:transition-none">
+      {/* Router state carries the loaded product forward for an immediate detail view.
+          The URL ID remains necessary because state can be missing on direct visits. */}
       <Link
         className="flex h-full flex-col text-ink no-underline focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-brand-orange"
         to={`/product/${product.id}`}

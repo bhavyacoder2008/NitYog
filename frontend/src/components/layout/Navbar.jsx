@@ -9,6 +9,8 @@ const categories = [
   { name: 'Soft Toys', slug: 'soft-toys' },
 ]
 
+// NavLink calls this function with router information for the current URL.
+// We derive active styling from the router instead of maintaining duplicate state.
 const navLinkClasses = ({ isActive }) =>
   `rounded-xl px-3 py-2.5 font-semibold text-ink no-underline transition-colors hover:bg-brand-orange/15 hover:text-brand-brown focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange ${
     isActive ? 'bg-brand-orange/15 text-brand-brown' : ''
@@ -31,12 +33,16 @@ function MenuIcon({ open }) {
 }
 
 function Navbar() {
+  // These states belong here because only the navbar needs to know which menu is open.
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  // The ref gives us the actual header DOM node for the outside-click boundary check.
   const navbarRef = useRef(null)
 
   useEffect(() => {
+    // This effect is justified because it synchronizes React with document-level events.
     function closeOnOutsideClick(event) {
+      // contains is false only when the clicked DOM node is outside the header.
       if (!navbarRef.current?.contains(event.target)) {
         setIsCategoriesOpen(false)
         setIsMobileMenuOpen(false)
@@ -52,6 +58,8 @@ function Navbar() {
 
     document.addEventListener('pointerdown', closeOnOutsideClick)
     document.addEventListener('keydown', closeOnEscape)
+
+    // Cleanup prevents duplicate document listeners if this component unmounts/remounts.
     return () => {
       document.removeEventListener('pointerdown', closeOnOutsideClick)
       document.removeEventListener('keydown', closeOnEscape)
@@ -84,6 +92,7 @@ function Navbar() {
             aria-expanded={isCategoriesOpen}
             aria-controls="category-menu"
             onClick={() => {
+              // Functional updates are safest when the next state depends on the old state.
               setIsCategoriesOpen((isOpen) => !isOpen)
               setIsMobileMenuOpen(false)
             }}
@@ -94,12 +103,14 @@ function Navbar() {
             </span>
           </button>
 
+          {/* Conditional rendering removes the dropdown from the DOM while closed. */}
           {isCategoriesOpen && (
             <ul
               className="absolute top-[calc(100%+0.75rem)] right-0 m-0 w-max min-w-52 list-none rounded-2xl border border-brand-brown/15 bg-[#fffaf0] p-2 shadow-[0_1rem_2rem_rgb(77_44_2_/_0.16)]"
               id="category-menu"
             >
               {categories.map((category) => (
+                // slug is both a stable React key and the dynamic route segment.
                 <li key={category.slug}>
                   <Link
                     className="block rounded-xl px-3.5 py-3 font-medium text-ink no-underline hover:bg-brand-orange/15 hover:text-brand-brown focus-visible:outline-3 focus-visible:outline-brand-orange"

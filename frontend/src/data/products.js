@@ -1,5 +1,7 @@
 import placeholderImage from '../../docs/brandkit/images/logo/mascot.png'
 
+// Temporary local data shaped like the future API response. Components therefore
+// remain independent of whether their products came from a file or the backend.
 export const products = [
   { id: 'racing-car', name: 'Racing Toy Car', price: 499, category: 'Cars', categorySlug: 'cars', image: placeholderImage },
   { id: 'city-bus', name: 'City Adventure Bus', price: 649, category: 'Cars', categorySlug: 'cars', image: placeholderImage },
