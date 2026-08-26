@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate, Route, Routes, useParams } from 'react-router-dom'
+import { Route, Routes, useParams } from 'react-router-dom'
 import Footer from './components/layout/Footer.jsx'
 import Navbar from './components/layout/Navbar.jsx'
 import WhatsAppFloatingButton from './components/layout/WhatsAppFloatingButton.jsx'
@@ -7,6 +7,7 @@ import ProductGrid from './components/product/ProductGrid.jsx'
 import SearchBar from './components/ui/SearchBar.jsx'
 import { products as dummyProducts } from './data/products.js'
 import ProductDetailPage from './pages/ProductDetailPage.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
 
 // A pure helper: same product + query always gives the same result.
 // Keeping search matching outside the component avoids duplicating it across pages.
@@ -121,8 +122,8 @@ function App() {
         <Route path="/product/:productId" element={<ProductDetailPage />} />
         <Route path="/contact" element={<InfoPage title="Contact Us" />} />
         <Route path="/about" element={<InfoPage title="About Us" />} />
-        {/* replace prevents the invalid URL from becoming an extra history entry. */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* The wildcard catches every URL that did not match a route above it. */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
       <WhatsAppFloatingButton />
