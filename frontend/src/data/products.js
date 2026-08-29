@@ -1,21 +1,96 @@
 import placeholderImage from '../../docs/brandkit/images/logo/mascot.png'
 
-// Temporary local data shaped like the future API response. Components therefore
-// remain independent of whether their products came from a file or the backend.
 export const products = [
-  { id: 'racing-car', name: 'Racing Toy Car', price: 499, category: 'Cars', categorySlug: 'cars', image: placeholderImage },
-  { id: 'city-bus', name: 'City Adventure Bus', price: 649, category: 'Cars', categorySlug: 'cars', image: placeholderImage },
-  { id: 'monster-truck', name: 'Mini Monster Truck', price: 799, category: 'Cars', categorySlug: 'cars', image: placeholderImage },
-  { id: 'classic-doll', name: 'Classic Dress-Up Doll', price: 899, category: 'Dolls', categorySlug: 'dolls', image: placeholderImage },
-  { id: 'doctor-doll', name: 'Little Doctor Doll', price: 749, category: 'Dolls', categorySlug: 'dolls', image: placeholderImage },
-  { id: 'family-doll-set', name: 'Happy Family Doll Set', price: 1199, category: 'Dolls', categorySlug: 'dolls', image: placeholderImage },
-  { id: 'alphabet-blocks', name: 'Alphabet Learning Blocks', price: 549, category: 'Educational Toys', categorySlug: 'educational-toys', image: placeholderImage },
-  { id: 'number-puzzle', name: 'Wooden Number Puzzle', price: 399, category: 'Educational Toys', categorySlug: 'educational-toys', image: placeholderImage },
-  { id: 'science-kit', name: 'Junior Science Kit', price: 999, category: 'Educational Toys', categorySlug: 'educational-toys', image: placeholderImage },
-  { id: 'teddy-bear', name: 'Cuddly Teddy Bear', price: 699, category: 'Soft Toys', categorySlug: 'soft-toys', image: placeholderImage },
-  { id: 'plush-rabbit', name: 'Soft Plush Rabbit', price: 599, category: 'Soft Toys', categorySlug: 'soft-toys', image: placeholderImage },
-  { id: 'sleepy-elephant', name: 'Sleepy Elephant Plush', price: 849, category: 'Soft Toys', categorySlug: 'soft-toys', image: placeholderImage },
-  { id: 'pull-back-car', name: 'Pull-Back Sports Car', price: 349, category: 'Cars', categorySlug: 'cars', image: placeholderImage },
-  { id: 'fashion-doll', name: 'Fashion Doll Set', price: 1099, category: 'Dolls', categorySlug: 'dolls', image: placeholderImage },
-  { id: 'shape-sorter', name: 'Colorful Shape Sorter', price: 459, category: 'Educational Toys', categorySlug: 'educational-toys', image: placeholderImage },
-]
+  {
+    id: 1,
+    name: "Talking Tom Cat",
+    price: 499,
+    image: "https://images.meesho.com/images/products/459507709/yf29b_512.avif?width=360",
+  },
+  {
+    id: 2,
+    name: "Doll House Playset",
+    price: 649,
+    image: "https://images.meesho.com/images/products/457023876/d68bn_512.avif?width=360",
+  },
+  {
+    id: 3,
+    name: "Naruto Playing cards",
+    price: 799,
+    image: "https://images.meesho.com/images/products/534786365/wkwng_512.avif?width=360",
+  },
+  {
+    id: 4                                     ,
+    name: "E-Rikshaw Toy",
+    price: 899,  
+    image: "https://images.meesho.com/images/products/448248426/9qhjp_512.avif?width=360",
+  },
+  {
+    id: 5,
+    name: "Machine gun toy",
+    price: 749,
+    image: "https://images.meesho.com/images/products/448156958/fd05d_512.avif?width=360",
+  },
+  {
+    id: 6,
+    name: "Ambassador Car Toy",
+    price: 1199,
+    image: "https://images.meesho.com/images/products/448156958/fd05d_512.avif?width=360",
+  },
+  {
+    id: 7,
+    name: "Fun Book Toy",
+    price: 549,
+    image: "https://images.meesho.com/images/products/447711418/v7ayk_512.avif?width=360",
+  },
+  {
+    id: 8,
+    name: "Mini Truck Toy",
+    price: 399,
+    image: "https://images.meesho.com/images/products/486033470/kyizf_512.avif?width=360",
+  },
+  {
+    id: 9,
+    name: "VIP car toy",
+    price: 999,
+    image: "https://images.meesho.com/images/products/704543710/ao4uc_512.avif?width=360",
+  },
+  {
+    id: 10,
+    name: "Avengers Action Figures",
+    price: 699,
+    image: "https://images.meesho.com/images/products/438112039/woqgl_512.avif?width=360",
+  },
+  {
+    id: 12  ,
+    name: "Soft Plush Rabbit",
+    price: 599,
+    image: placeholderImage,
+  },
+  {
+    id: 13,
+    name: "Sleepy Elephant Plush",
+    price: 849,
+    image: placeholderImage,
+  },
+  {
+    id: 14,
+    name: "Pull-Back Sports Car",
+    price: 349,
+    
+    image: placeholderImage,
+  },
+  {
+    id: 15,
+    name: "Fashion Doll Set",
+    price: 1099,
+    
+    image: placeholderImage,
+  },
+  {
+    id: 16,
+    name: "Colorful Shape Sorter",
+    price: 459,
+    image: placeholderImage,
+  },
+];

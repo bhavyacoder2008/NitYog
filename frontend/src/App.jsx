@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Route, Routes, useParams } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/Footer.jsx'
 import Navbar from './components/layout/Navbar.jsx'
 import WhatsAppFloatingButton from './components/layout/WhatsAppFloatingButton.jsx'
@@ -8,6 +8,7 @@ import SearchBar from './components/ui/SearchBar.jsx'
 import { products as dummyProducts } from './data/products.js'
 import ProductDetailPage from './pages/ProductDetailPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import AboutPage from './pages/AboutPage.jsx'
 
 // A pure helper: same product + query always gives the same result.
 // Keeping search matching outside the component avoids duplicating it across pages.
@@ -16,7 +17,7 @@ function matchesSearch(product, query) {
 
   return (
     product.name.toLowerCase().includes(normalizedQuery) ||
-    product.category.toLowerCase().includes(normalizedQuery)
+    (product.category?.toLowerCase().includes(normalizedQuery) ?? false)
   )
 }
 
@@ -59,54 +60,6 @@ function HomePage() {
   )
 }
 
-function CategoryPage() {
-  // useParams reads the dynamic part of /categories/:categorySlug from the URL.
-  const { categorySlug } = useParams()
-  const [searchQuery, setSearchQuery] = useState('')
-  const [submittedQuery, setSubmittedQuery] = useState('')
-  const categoryName = categorySlug.replaceAll('-', ' ')
-  // Scope products to the route category before applying the submitted search.
-  const categoryProducts = dummyProducts.filter(
-    (product) => product.categorySlug === categorySlug,
-  )
-  const displayedProducts = submittedQuery
-    ? categoryProducts.filter((product) => matchesSearch(product, submittedQuery))
-    : categoryProducts
-
-  function handleSearch(query) {
-    // Replace this local filtering trigger with the category product API call.
-    setSubmittedQuery(query)
-  }
-
-  function handleQueryChange(query) {
-    setSearchQuery(query)
-    if (!query.trim()) setSubmittedQuery('')
-  }
-
-  return (
-    <main className="mx-auto min-h-[120vh] w-[min(calc(100%-2rem),75rem)] py-12 md:py-24">
-      <h1 className="mb-3 font-heading text-4xl font-semibold capitalize">{categoryName}</h1>
-      <p className="mb-8">Products for this category will appear here.</p>
-      <SearchBar
-        value={searchQuery}
-        onChange={handleQueryChange}
-        onSubmit={handleSearch}
-        placeholder={`Search in ${categoryName}...`}
-        label={`Search toys in ${categoryName}`}
-      />
-      <section className="mt-12" aria-labelledby="category-products-heading">
-        <h2
-          className="mb-6 font-heading text-3xl font-semibold"
-          id="category-products-heading"
-        >
-          {submittedQuery ? 'Search Results' : `Top ${categoryName}`}
-        </h2>
-        <ProductGrid products={displayedProducts} limit={8} />
-      </section>
-    </main>
-  )
-}
-
 function InfoPage({ title }) {
   return <main className="mx-auto min-h-[120vh] w-[min(calc(100%-2rem),75rem)] py-12 md:py-24"><h1 className="mb-3 font-heading text-4xl font-semibold">{title}</h1><p>Page content will be added later.</p></main>
 }
@@ -118,10 +71,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/categories/:categorySlug" element={<CategoryPage />} />
         <Route path="/product/:productId" element={<ProductDetailPage />} />
         <Route path="/contact" element={<InfoPage title="Contact Us" />} />
-        <Route path="/about" element={<InfoPage title="About Us" />} />
+        <Route path="/about" element={<AboutPage />} />
         {/* The wildcard catches every URL that did not match a route above it. */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

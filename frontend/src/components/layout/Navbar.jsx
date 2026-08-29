@@ -2,27 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from '../../assets/nityog-logo-transparent.png'
 
-const categories = [
-  { name: 'Cars', slug: 'cars' },
-  { name: 'Dolls', slug: 'dolls' },
-  { name: 'Educational Toys', slug: 'educational-toys' },
-  { name: 'Soft Toys', slug: 'soft-toys' },
-]
-
 // NavLink calls this function with router information for the current URL.
 // We derive active styling from the router instead of maintaining duplicate state.
 const navLinkClasses = ({ isActive }) =>
   `rounded-xl px-3 py-2.5 font-semibold text-ink no-underline transition-colors hover:bg-brand-orange/15 hover:text-brand-brown focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange ${
     isActive ? 'bg-brand-orange/15 text-brand-brown' : ''
   }`
-
-function ChevronIcon() {
-  return (
-    <svg className="w-4 fill-none stroke-current stroke-2" viewBox="0 0 20 20" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m5 7.5 5 5 5-5" />
-    </svg>
-  )
-}
 
 function MenuIcon({ open }) {
   return (
@@ -33,8 +18,7 @@ function MenuIcon({ open }) {
 }
 
 function Navbar() {
-  // These states belong here because only the navbar needs to know which menu is open.
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false)
+  // This state belongs here because only the navbar needs to know if its menu is open.
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   // The ref gives us the actual header DOM node for the outside-click boundary check.
   const navbarRef = useRef(null)
@@ -44,14 +28,12 @@ function Navbar() {
     function closeOnOutsideClick(event) {
       // contains is false only when the clicked DOM node is outside the header.
       if (!navbarRef.current?.contains(event.target)) {
-        setIsCategoriesOpen(false)
         setIsMobileMenuOpen(false)
       }
     }
 
     function closeOnEscape(event) {
       if (event.key === 'Escape') {
-        setIsCategoriesOpen(false)
         setIsMobileMenuOpen(false)
       }
     }
@@ -67,7 +49,6 @@ function Navbar() {
   }, [])
 
   function closeMenus() {
-    setIsCategoriesOpen(false)
     setIsMobileMenuOpen(false)
   }
 
@@ -85,60 +66,20 @@ function Navbar() {
           <img className="h-13 w-26 object-contain md:h-16 md:w-38" src={logo} alt="NitYog — Little Joys, Big Smiles" />
         </Link>
 
-        <div className="relative ml-auto">
-          <button
-            className="flex min-h-11 cursor-pointer items-center gap-1 rounded-xl border-0 bg-transparent px-2 font-body text-sm font-semibold text-ink hover:bg-brand-orange/15 hover:text-brand-brown focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange md:px-3 md:text-base"
-            type="button"
-            aria-expanded={isCategoriesOpen}
-            aria-controls="category-menu"
-            onClick={() => {
-              // Functional updates are safest when the next state depends on the old state.
-              setIsCategoriesOpen((isOpen) => !isOpen)
-              setIsMobileMenuOpen(false)
-            }}
-          >
-            Categories
-            <span className={`transition-transform motion-reduce:transition-none ${isCategoriesOpen ? 'rotate-180' : ''}`}>
-              <ChevronIcon />
-            </span>
-          </button>
-
-          {/* Conditional rendering removes the dropdown from the DOM while closed. */}
-          {isCategoriesOpen && (
-            <ul
-              className="absolute top-[calc(100%+0.75rem)] right-0 m-0 w-max min-w-52 list-none rounded-2xl border border-brand-brown/15 bg-[#fffaf0] p-2 shadow-[0_1rem_2rem_rgb(77_44_2_/_0.16)]"
-              id="category-menu"
-            >
-              {categories.map((category) => (
-                // slug is both a stable React key and the dynamic route segment.
-                <li key={category.slug}>
-                  <Link
-                    className="block rounded-xl px-3.5 py-3 font-medium text-ink no-underline hover:bg-brand-orange/15 hover:text-brand-brown focus-visible:outline-3 focus-visible:outline-brand-orange"
-                    to={`/categories/${category.slug}`}
-                    onClick={closeMenus}
-                  >
-                    {category.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="ml-auto hidden items-center gap-1 md:flex">
           <NavLink className={navLinkClasses} to="/contact">Contact Us</NavLink>
           <NavLink className={navLinkClasses} to="/about">About Us</NavLink>
         </div>
 
         <button
-          className="ml-1 inline-flex size-11 items-center justify-center rounded-xl border border-brand-brown/25 bg-transparent p-0 text-ink focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange md:hidden"
+          className="ml-auto inline-flex size-11 items-center justify-center rounded-xl border border-brand-brown/25 bg-transparent p-0 text-ink focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange md:hidden"
           type="button"
           aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
           onClick={() => {
+            // Functional updates are safest when the next state depends on the old state.
             setIsMobileMenuOpen((isOpen) => !isOpen)
-            setIsCategoriesOpen(false)
           }}
         >
           <MenuIcon open={isMobileMenuOpen} />

@@ -15,7 +15,7 @@ function ProductDetailPage() {
 
   // Never display state for the wrong URL. Direct visits currently fall back because
   // database fetching has intentionally not been implemented yet.
-  const product = passedProduct?.id === productId ? passedProduct : null
+  const product = String(passedProduct?.id) === productId ? passedProduct : null
 
   if (!product) {
     return (

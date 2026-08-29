@@ -1,6 +1,5 @@
 import { FaWhatsapp } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import mascot from '../../docs/brandkit/images/logo/mascot.png'
 import {
   buildWhatsAppUrl,
   defaultWhatsAppMessage,
