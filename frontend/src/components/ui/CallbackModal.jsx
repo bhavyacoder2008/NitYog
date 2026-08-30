@@ -54,7 +54,7 @@ function CallbackModal({ onClose, product, mode = 'enquiry' }) {
 
   return (
     <dialog
-      className="fixed inset-0 m-auto max-h-[calc(100vh-2rem)] w-[min(calc(100%-2rem),34rem)] overflow-y-auto rounded-3xl border-0 bg-[#fffaf0] p-0 text-ink shadow-[0_2rem_5rem_rgb(33_33_33_/_0.35)] backdrop:bg-ink/55 backdrop:backdrop-blur-sm"
+      className="fixed inset-0 m-auto max-h-[calc(100vh-2rem)] w-[min(calc(100%-2rem),34rem)] animate-modal-pop overflow-y-auto rounded-3xl border-0 bg-[#fffaf0] p-0 text-ink shadow-[0_2rem_5rem_rgb(33_33_33_/_0.35)] backdrop:bg-ink/55 backdrop:backdrop-blur-sm motion-reduce:animate-none"
       ref={dialogRef}
       aria-labelledby="callback-title"
       aria-describedby="callback-description"

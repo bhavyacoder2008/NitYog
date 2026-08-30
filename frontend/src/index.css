@@ -11,6 +11,7 @@
   --font-body: "Inter", sans-serif;
   --animate-gentle-float: gentle-float 5s ease-in-out infinite;
   --animate-soft-pulse: soft-pulse 4s ease-in-out infinite;
+  --animate-modal-pop: modal-pop 320ms cubic-bezier(0.2, 0.85, 0.3, 1.15) both;
 
   @keyframes gentle-float {
     0%, 100% {
@@ -28,6 +29,21 @@
     }
     50% {
       transform: scale(1.08);
+      opacity: 1;
+    }
+  }
+
+  @keyframes modal-pop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    75% {
+      transform: scale(1.03);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
       opacity: 1;
     }
   }

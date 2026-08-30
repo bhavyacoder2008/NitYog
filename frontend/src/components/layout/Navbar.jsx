@@ -67,6 +67,7 @@ function Navbar() {
         </Link>
 
         <div className="ml-auto hidden items-center gap-1 md:flex">
+          <NavLink className={navLinkClasses} to="/" end>Home</NavLink>
           <NavLink className={navLinkClasses} to="/contact">Contact Us</NavLink>
           <NavLink className={navLinkClasses} to="/about">About Us</NavLink>
         </div>
@@ -90,6 +91,7 @@ function Navbar() {
             className="absolute top-[calc(100%+0.5rem)] right-0 grid min-w-44 rounded-2xl border border-brand-brown/15 bg-[#fffaf0] p-2 shadow-[0_1rem_2rem_rgb(77_44_2_/_0.16)] md:hidden"
             id="mobile-menu"
           >
+            <NavLink className={navLinkClasses} to="/" end onClick={closeMenus}>Home</NavLink>
             <NavLink className={navLinkClasses} to="/contact" onClick={closeMenus}>Contact Us</NavLink>
             <NavLink className={navLinkClasses} to="/about" onClick={closeMenus}>About Us</NavLink>
           </div>
