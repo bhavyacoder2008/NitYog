@@ -10,15 +10,34 @@ import ProductDetailPage from './pages/ProductDetailPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 
+// Split on any non-alphanumeric run so "pull-back", "pull back" and "PULL_BACK"
+// are treated as the same two words, and so punctuation in a query is harmless.
+function toWords(value) {
+  return value.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
+}
+
 // A pure helper: same product + query always gives the same result.
 // Keeping search matching outside the component avoids duplicating it across pages.
 function matchesSearch(product, query) {
-  const normalizedQuery = query.toLowerCase()
+  const searchWords = toWords(query)
 
-  return (
-    product.name.toLowerCase().includes(normalizedQuery) ||
-    (product.category?.toLowerCase().includes(normalizedQuery) ?? false)
+  // An empty query would make every() pass vacuously, returning the whole catalogue.
+  if (searchWords.length === 0) return false
+
+  // The name and category are searchable on their own; each keyword is one more
+  // way a parent might describe the same product.
+  const productWords = new Set(
+    toWords(
+      [product.name, product.category, ...(product.keywords ?? [])]
+        .filter(Boolean)
+        .join(' '),
+    ),
   )
+
+  // Words are compared whole rather than as substrings, so "car" finds the car
+  // toys without also matching "cards". Every typed word must be present, which
+  // means extra words narrow the results instead of widening them.
+  return searchWords.every((word) => productWords.has(word))
 }
 
 // The first view shows the eight most popular products; each View More click

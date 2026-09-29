@@ -28,7 +28,7 @@ function SearchBar({
     <form
       className="flex w-full items-center gap-2 rounded-2xl border border-brand-brown/20 bg-[#fffaf0] p-2 shadow-[0_0.5rem_1.5rem_rgb(77_44_2_/_0.1)] focus-within:border-brand-orange focus-within:ring-3 focus-within:ring-brand-orange/20"
       role="search"
-      onSubmit={handleSubmit}
+      onSubmit={(e) => handleSubmit(e)}
     >
       <label className="sr-only" htmlFor="toy-search">
         {label}
@@ -52,7 +52,7 @@ function SearchBar({
       <button
         className="min-h-10 shrink-0 cursor-pointer rounded-xl border-0 bg-brand-orange px-4 font-body font-semibold text-ink transition-colors hover:bg-brand-brown hover:text-white focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-brand-orange disabled:cursor-not-allowed disabled:opacity-50 md:px-6"
         type="submit"
-        disabled={!value.trim()}
+        disabled={!value.trim()} //smart AI lol i would have made a false condition but you fkin did in less space hmmmmmm maybe you can replace me son
       >
         Search
       </button>
