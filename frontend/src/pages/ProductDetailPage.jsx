@@ -26,6 +26,7 @@ function ProductDetailPage() {
             Please open this product from the NitYog catalogue to view its details.
           </p>
           <Link
+            data-button="true"
             className="mt-6 inline-flex rounded-xl bg-brand-orange px-5 py-3 font-semibold text-ink no-underline hover:bg-brand-brown hover:text-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange"
             to="/"
           >
@@ -92,6 +93,7 @@ function ProductDetailPage() {
             </button>
 
             <a
+              data-button="true"
               className="mt-3 inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl bg-[#25d366] px-5 py-3 font-semibold text-[#102a18] no-underline transition-colors hover:bg-[#20bd5a] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-brown"
               href={buildWhatsAppUrl(enquiryMessage)}
               target="_blank"

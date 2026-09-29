@@ -57,6 +57,7 @@ function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <h2 className="mb-3 font-heading text-lg font-semibold">Connect With Us</h2>
           <a
+            data-button="true"
             className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#25d366] px-4 py-2.5 font-semibold text-[#102a18] no-underline hover:bg-[#20bd5a] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange"
             href={buildWhatsAppUrl(defaultWhatsAppMessage)}
             target="_blank"
@@ -75,6 +76,7 @@ function Footer() {
               return (
                 <li key={social.name}>
                   <a
+                    data-button="true"
                     className="inline-flex size-11 items-center justify-center rounded-full border border-cream/30 text-cream transition-colors hover:border-brand-orange hover:bg-brand-orange hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange"
                     href={social.href}
                     target="_blank"

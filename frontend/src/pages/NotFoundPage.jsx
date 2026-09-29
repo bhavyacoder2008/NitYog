@@ -30,6 +30,7 @@ function NotFoundPage() {
 
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row md:justify-start">
             <a
+              data-button="true"
               className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-[#25d366] px-5 py-3 font-semibold text-[#102a18] no-underline transition-colors hover:bg-[#20bd5a] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-brown"
               href={buildWhatsAppUrl(defaultWhatsAppMessage)}
               target="_blank"
@@ -39,6 +40,7 @@ function NotFoundPage() {
               Ask Us on WhatsApp
             </a>
             <Link
+              data-button="true"
               className="inline-flex min-h-13 items-center justify-center rounded-xl border-2 border-brand-brown px-5 py-3 font-semibold text-brand-brown no-underline transition-colors hover:bg-brand-brown hover:text-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange"
               to="/"
             >

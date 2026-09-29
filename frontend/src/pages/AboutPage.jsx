@@ -43,6 +43,7 @@ function AboutPage() {
             NitYog is an online toy catalogue helping parents discover and buy from a wide range of children’s toys with friendly, personal assistance whenever they need it.
           </p>
           <a
+            data-button="true"
             className="mt-8 inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl bg-[#25d366] px-6 py-3 font-semibold text-[#102a18] no-underline shadow-[0_0.75rem_1.5rem_rgb(16_42_24_/_0.18)] transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-[#20bd5a] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-brown motion-reduce:transition-none"
             href={whatsappUrl}
             target="_blank"
@@ -119,6 +120,7 @@ function AboutPage() {
           </p>
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
             <a
+              data-button="true"
               className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-[#25d366] px-5 py-3 font-semibold text-[#102a18] no-underline hover:bg-[#20bd5a] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-brown"
               href={whatsappUrl}
               target="_blank"
@@ -151,6 +153,7 @@ function AboutPage() {
               Looking for the right toy? Let’s find it together.
             </h2>
             <a
+              data-button="true"
               className="mt-5 inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-[#25d366] px-5 py-3 font-semibold text-[#102a18] no-underline hover:bg-[#20bd5a] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange"
               href={whatsappUrl}
               target="_blank"
