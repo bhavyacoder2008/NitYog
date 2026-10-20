@@ -28,6 +28,7 @@ const modalContent = {
 function CallbackModal({ onClose, product, mode = 'enquiry' }) {
   const dialogRef = useRef(null)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const content = modalContent[mode]
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: { phoneNumber: '' },
@@ -48,13 +49,26 @@ function CallbackModal({ onClose, product, mode = 'enquiry' }) {
     if (event.target === dialogRef.current) onClose()
   }
 
-  async function handleFormSubmit() {
-    const response = await sendEmail({number: document.getElementById('customer-phone').value, productName: product.name})
-    if (!response) {
+  async function handleFormSubmit({ phoneNumber }) {
+    setIsSubmitting(true)
+
+    try {
+      const response = await sendEmail({
+        phoneNumber,
+        product: product?.name ?? 'General enquiry',
+      })
+
+      if (!response) {
+        alert('Failed to send email')
+        return
+      }
+
+      setIsSubmitted(true)
+    } catch {
       alert('Failed to send email')
-      return
+    } finally {
+      setIsSubmitting(false)
     }
-    setIsSubmitted(true)
   }
 
   return (
@@ -136,8 +150,14 @@ function CallbackModal({ onClose, product, mode = 'enquiry' }) {
                 <p className="mt-2 text-sm font-medium text-red-700" id="phone-error" role="alert">{errors.phoneNumber.message}</p>
               )}
 
-              <button className="mt-6 min-h-14 w-full cursor-pointer rounded-xl border-0 bg-brand-orange px-6 font-body text-lg font-bold text-ink shadow-[0_0.6rem_1.25rem_rgb(230_142_2_/_0.25)] transition-colors hover:bg-brand-brown hover:text-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange" type="submit">
-                Request a Callback
+              <button className="mt-6 inline-flex min-h-14 w-full cursor-pointer items-center justify-center gap-3 rounded-xl border-0 bg-brand-orange px-6 font-body text-lg font-bold text-ink shadow-[0_0.6rem_1.25rem_rgb(230_142_2_/_0.25)] transition-colors hover:bg-brand-brown hover:text-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-orange disabled:cursor-wait disabled:opacity-75" type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+                {isSubmitting && (
+                  <span
+                    className="size-5 animate-spin rounded-full border-2 border-ink/30 border-t-ink motion-reduce:animate-none"
+                    aria-hidden="true"
+                  />
+                )}
+                <span>{isSubmitting ? 'Sending request...' : 'Request a Callback'}</span>
               </button>
               <button className="mt-3 min-h-11 w-full cursor-pointer border-0 bg-transparent font-body font-semibold text-ink/60 hover:text-brand-brown focus-visible:outline-3 focus-visible:outline-brand-orange" type="button" onClick={onClose}>
                 Not Now

@@ -9,9 +9,8 @@ export async function sendEmail(data) {// data is an object
         import.meta.env.VITE_EMAIL_SERVICE_ID,
         import.meta.env.VITE_EMAIL_TEMPLATE_ID,
         {
-            name: data.productName,
-            email: data.number,
-            message: data.message || "No message provided",
+          phoneNumber: data.phoneNumber,
+          product: data.product
         },
         import.meta.env.VITE_EMAIL_PUBLIC_KEY
       );
