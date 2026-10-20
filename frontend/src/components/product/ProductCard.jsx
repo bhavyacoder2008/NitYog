@@ -22,9 +22,6 @@ function ProductCard({ product }) {
         </div>
 
         <div className="flex flex-1 flex-col p-3 md:p-4">
-          <p className="mb-1 text-xs font-medium text-brand-brown md:text-sm">
-            {product.category}
-          </p>
           <h3 className="mb-3 font-heading text-base leading-tight font-semibold md:text-xl">
             {product.name}
           </h3>

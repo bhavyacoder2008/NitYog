@@ -72,8 +72,6 @@ function ProductDetailPage() {
 
             <dl className="mt-8 grid gap-5 border-y border-brand-brown/15 py-6">
               <div className="flex items-center justify-between gap-4">
-                <dt className="text-ink/65">Category</dt>
-                <dd className="m-0 font-semibold">{product.category}</dd>
               </div>
               <div className="flex items-center justify-between gap-4">
                 <dt className="text-ink/65">Price</dt>
