@@ -7,15 +7,12 @@ import { buildWhatsAppUrl } from '../utils/whatsapp.js'
 const aboutWhatsAppMessage =
   'Hi, I have a question about NitYog toys. Please help me with more information.'
 
-const businessGstin = import.meta.env.VITE_BUSINESS_GSTIN?.trim()
+const businessGstin = "07CPWPM2239A1ZT"
 
 function AboutPage() {
   const whatsappUrl = buildWhatsAppUrl(aboutWhatsAppMessage)
-  const whatsappNumber = new URL(whatsappUrl).pathname.slice(1)
-  const formattedNumber = /^91\d{10}$/.test(whatsappNumber)
-    ? `+91 ${whatsappNumber.slice(2, 7)} ${whatsappNumber.slice(7)}`
-    : `+${whatsappNumber}`
-
+  const businessEmail = "nityogenterprises@gmail.com"
+  const formattedNumber = ["9540408104", "7011439454"]
   return (
     <main className="mx-auto w-[min(calc(100%-2rem),75rem)] py-10 md:py-16">
       <header className="border-b border-brand-brown/15 pb-6 md:pb-8">
@@ -67,33 +64,24 @@ function AboutPage() {
             <dl className="mt-6 divide-y divide-brand-brown/15">
               <div className="grid gap-1 pb-4 sm:grid-cols-[8rem_1fr] sm:gap-5">
                 <dt className="text-sm text-ink/65">Business</dt>
-                <dd className="m-0 font-semibold">NitYog</dd>
+                <dd className="m-0 font-semibold">NitYog Enterprises</dd>
               </div>
 
-              {businessAddress && (
-                <div className="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-5">
-                  <dt className="text-sm text-ink/65">Address</dt>
-                  <dd className="m-0">
-                    <address className="whitespace-pre-line leading-7 wrap-anywhere not-italic">
-                      {businessAddress}
-                    </address>
-                  </dd>
-                </div>
-              )}
-
-              {businessGstin && (
                 <div className="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-5">
                   <dt className="text-sm text-ink/65">GST number</dt>
                   <dd className="m-0 font-medium tracking-wide wrap-anywhere">
                     {businessGstin}
                   </dd>
                 </div>
-              )}
-
               <div className="grid gap-1 pt-4 sm:grid-cols-[8rem_1fr] sm:gap-5">
                 <dt className="text-sm text-ink/65">WhatsApp</dt>
-                <dd className="m-0 font-medium wrap-anywhere">{formattedNumber}</dd>
+                <dd className="m-0 font-medium wrap-anywhere">{formattedNumber[0]} / {formattedNumber[1]}</dd>
               </div>
+              <div className="grid gap-1 pt-4 sm:grid-cols-[8rem_1fr] sm:gap-5">
+                <dt className="text-sm text-ink/65">E-mail</dt>
+                <dd className="m-0 font-medium wrap-anywhere">{businessEmail}</dd>
+              </div>
+
             </dl>
           </div>
 

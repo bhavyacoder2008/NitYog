@@ -1,5 +1,5 @@
 const whatsappNumber =
-  import.meta.env.VITE_WHATSAPP_NUMBER || '917701939134'
+  import.meta.env.VITE_WHATSAPP_NUMBER || '919540408104'
 
 export const defaultWhatsAppMessage =
   'Hi, I would like to know more about NitYog toys.'
